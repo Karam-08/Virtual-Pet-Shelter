@@ -1,0 +1,27 @@
+{
+  "name": "virtual-pet-shelter",
+  "version": "1.0.0",
+  "description": "Virtual Pet Shelter",
+  "keywords": [
+    "Pet",
+    "Shelter"
+  ],
+  "homepage": "https://github.com/Karam-08/Virtual-Pet-Shelter#readme",
+  "bugs": {
+    "url": "https://github.com/Karam-08/Virtual-Pet-Shelter/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Karam-08/Virtual-Pet-Shelter.git"
+  },
+  "license": "MIT",
+  "author": "Karam Abbas",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
