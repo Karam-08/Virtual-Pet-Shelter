@@ -18,10 +18,10 @@ class Pet{
         this.hunger += 1
     }
     status(){
-        if(this.hunger <= 0){ // Starvation
+        if(this.hunger <= 0){ // Overfeeding
             this.alive = false
-            return `${this.name} was overfed to the point that his stomach burst. RIP ${this.name}... You will be missed.`; // Death message
-        }else if(this.hunger >= 10){ // Overfeeding
+            return `${this.name} was overfed to the point that his stomach burst. RIP ${this.name}... You will be missed.`; // Death message as HTML snippet
+        }else if(this.hunger >= 10){ // Starving
             this.alive = false
             return `${this.name} was so hungry that he starved to death. RIP ${this.name}... You will be missed.`;
         }else if(this.happiness >= 10){ // Too happy
@@ -50,7 +50,7 @@ class Dog extends Pet{
         this.breed = breed
     }
     bark(){
-        console.log("Woof! Woof!")
+        return "Woof! Woof!"
     }
     status(){
         if(this.hunger <= 0){
@@ -110,7 +110,7 @@ class Cat extends Pet{
         }
     }
     purr(){
-        console.log("Purr...")
+        return "Purr..."
     }
     play(){
         this.happiness += 1
@@ -147,7 +147,6 @@ function render(){
                     render(); // Renders every button click. This way, you don't need a button dedicated to rendering!
                 }
             }
-
             let playBtn = document.createElement("button");
             playBtn.innerText = "Play";
             playBtn.onclick = function(){
@@ -158,7 +157,6 @@ function render(){
                     render();
                 }
             }
-
             let restBtn = document.createElement("button");
             restBtn.innerText = "Rest";
             restBtn.onclick = function(){
@@ -169,7 +167,6 @@ function render(){
                     render();
                 }
             }
-
             let adoptBtn = document.createElement("button");
             adoptBtn.innerText = "Adopt";
             adoptBtn.onclick = function(){
@@ -180,7 +177,6 @@ function render(){
                     render();
                 }
             }
-
             let releaseBtn = document.createElement("button");
             releaseBtn.innerText = "Release/Remove";
             releaseBtn.onclick = function(){
@@ -193,16 +189,67 @@ function render(){
                     render();   
                 }
             }
+            if("breed" in pet){ // Breed is only in dogs so this selects dogs
+                let barkBtn = document.createElement("button")
+                barkBtn.innerText = "Bark";
+                barkBtn.onclick = function(){
+                    pet.bark();
+                    alert(`${pet.name} is barking! But at what?`)
+                }
+                petDiv.appendChild(barkBtn)
+            }
+            if("color" in pet){ // Same logic applies for cats
+                let purrBtn = document.createElement("button")
+                purrBtn.innerText = "Purr";
+                purrBtn.onclick = function(){
+                    pet.purr();
+                    alert(`${pet.name} is purring! ${pet.name} is comfortable.`)
+                }
+                petDiv.appendChild(purrBtn)
+            }
 
             petDiv.appendChild(feedBtn); // Adds button to the petDiv
             petDiv.appendChild(playBtn);
             petDiv.appendChild(restBtn);
             petDiv.appendChild(adoptBtn);
-            petDiv.appendChild(releaseBtn)
-        }
+            petDiv.appendChild(releaseBtn);
 
+        }else{ // This is to get rid of the petDiv once the pet dies dead (basically another releaseBtn)
+            let releaseBtn = document.createElement("button");
+            releaseBtn.innerText = "Leave";
+            releaseBtn.onclick = function(){
+                let release = confirm(`Are you sure you want to leave ${pet.name}?`) // Sob
+                if(release){
+                    let index = shelter.indexOf(pet);
+                    if(index > -1){
+                        shelter.splice(index, 1)
+                    }
+                    render();   
+                }
+            }
+            petDiv.append(releaseBtn)
+        }
         container.appendChild(petDiv); // The petDiv is then added to the container
     });
+}
+
+function addPet(){
+    let type = prompt("Do you want a Dog or a Cat?").toLowerCase() // Helps with if statements
+    let name = prompt("Enter the pet's name:")
+    let hunger = 5 // Set values
+    let happiness = 5
+
+    if(type === "dog"){
+        let breed = prompt("Enter the dog's breed:") // Dog trait
+        shelter.push(new Dog(name, hunger, happiness, false, breed)) // Pushes the new pet into the shelter array
+    }else if(type === "cat"){
+        let color = prompt("Enter the cat's color:") // Cat trait
+        shelter.push(new Cat(name, hunger, happiness, false, color))
+    }else{
+        alert("Unknown pet type!")
+        return;
+    }
+    render();
 }
 
 render(); // Renders everything
