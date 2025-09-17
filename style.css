@@ -1,5 +1,48 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body{
-    background-color: black;
-    color: #00c04b;
-    font-family: "Consolas, 'Courier New', monospace";
+    background-color: beige;
+    text-align: center;
+}
+
+button{
+    margin: 10px;
+    padding: 8px;
+    border-radius: 10px;
+    border: 2px solid black;
+    background-color: rgb(60, 215, 60);
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: rgb(53, 146, 53);
+    color: white;
+    text-decoration: underline;
+}
+
+#pet-display{
+    display: flex;
+    align-items: center;
+    height: 60vh;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-self: center;
+}
+
+.pet-card{
+    padding: 15px;
+    border: 3px solid black;
+    border-radius: 10px;
+    text-align: center;
+    background-color: lightblue;
+}
+
+h2{
+    margin-bottom: 5px;
+    color: white;
 }
