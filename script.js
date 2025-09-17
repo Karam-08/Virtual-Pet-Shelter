@@ -50,7 +50,7 @@ class Dog extends Pet{
         this.breed = breed
     }
     bark(){
-        return "Woof! Woof!"
+        console.log("Woof! Woof!")
     }
     status(){
         if(this.hunger <= 0){
@@ -110,7 +110,7 @@ class Cat extends Pet{
         }
     }
     purr(){
-        return "Purr..."
+        console.log("Purr...")
     }
     play(){
         this.happiness += 1
