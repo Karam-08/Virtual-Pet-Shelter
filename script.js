@@ -252,4 +252,4 @@ function addPet(){
     render();
 }
 
-render(); // Renders everything
+render(); // Renders everything on load
